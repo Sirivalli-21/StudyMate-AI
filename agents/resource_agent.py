@@ -8,7 +8,7 @@ targeted, high-quality, free educational resources for specific topics and grade
 from typing import List, Dict, Any
 from agents.base_agent import BaseAgent
 from utils.gemini_helper import GeminiHelper
-
+from utils.search_helper import search_resources
 class ResourceAgent(BaseAgent):
     """
     Agent responsible for curating learning resources (websites, courses, channels).
@@ -44,23 +44,56 @@ class ResourceAgent(BaseAgent):
             topic = item.get("topic", "").strip()
             grade = item.get("grade", "").strip()
             subject_context += f"### Subject {idx + 1}: {subject}\n- **Specific Topics**: {topic}\n- **Grade Level**: {grade}\n\n"
-            
+        real_resources = ""
+        for item in study_data:
+            subject=item.get("subject","").strip()
+            topic = item.get("topic", "").strip()
+            query= f"{subject} {topic} tutorial"
+            try:
+                results = search_resources(query, max_results=5)
+            except Exception:
+                results= []
+            real_resources += f"\nTopic: {topic}\n"
+            for r in results:
+                real_resources += (
+                    f"Title: {r['title']}\n"
+                    f"URL: {r['url']}\n"
+                    f"Description: {r['body']}\n\n"
+                )   
         prompt = f"""
 Find and recommend the best free educational resources tailored to these subjects, specific topics, and grade levels:
 
 {subject_context}
 
+REAL SEARCH RESULTS FROM THE INTERNET:
+
+{real_resources}
+
+IMPORTANT RULES:
+1. Use the URLs from the search results above whenever possible.
+2. Do NOT invent URLs.
+3. Do NOT create fake YouTube links.
+4. Prefer resources that appear in the real search results.
+5. If a search result is highly relevant, include it in the final answer.
+
 For EACH subject, provide a structured list of resources under these categories:
-1. **Top YouTube Channels**: Recommend 2-3 channels that explain these specific topics visually and clearly for this grade level.
-2. **Websites & Interactive Learning**: Recommend 1-2 reputable websites for documentation, reading, or interactive exercises matching this curriculum level.
-3. **Free Online Courses**: Recommend 1-2 free online courses or learning paths (e.g., Khan Academy, MIT OpenCourseWare, Coursera/edX audit options).
+1. Top YouTube Channels
+2. Websites & Interactive Learning
+3. Free Online Courses
+For every resource:
 
-For every recommendation, you MUST provide:
-- The resource name (e.g. "Khan Academy", "CrashCourse")
-- A short description (1-2 sentences) of what makes this resource valuable for these specific topics and grade level.
-- A descriptive markdown hyperlink to help the user find it (e.g., `[Khan Academy](https://www.khanacademy.org)`). Ensure all links are standard, high-quality, and direct resources.
+- Show the title.
+- Show the actual URL.
+- Show a short description.
+- Format links using Markdown.
 
-Organize the final output using clear Markdown headers, bold text, and bullet points. Make it visually appealing and easy to navigate.
+Example:
+
+- Python Pandas Documentation
+  https://pandas.pydata.org/
+
+- Pandas Tutorial
+  https://www.datacamp.com/tutorial/pandas
 """
         return self.gemini_helper.generate_content(
             prompt=prompt,
