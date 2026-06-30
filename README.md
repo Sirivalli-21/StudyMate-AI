@@ -55,21 +55,24 @@ graph TD
 
 ```
 StudyMate-AI/
-├── app.py                  # Main Streamlit user interface & orchestration entrypoint
-├── requirements.txt        # Python libraries required
-├── README.md               # Setup and usage guide (this file)
-├── .env.example            # Template for storing secrets
-├── agents/                 # Agent classes
-│   ├── base_agent.py       # Abstract BaseAgent parent class
-│   ├── coordinator_agent.py# Coordinates & orchestrates sub-agents
-│   ├── planner_agent.py    # Generates study schedule
-│   ├── resource_agent.py   # Recommends learning resources
-│   └── quiz_agent.py       # Generates practice questions
-├── utils/                  # Helper utilities
-│   └── gemini_helper.py    # Gemini API wrapper with error handling
-└── assets/                 # Folder for styling images and visual assets
-    └── .gitkeep            # Empty file keeping folder in Git tracking
-```
+├── app.py                    # Main Streamlit application
+├── requirements.txt          # Python dependencies
+├── README.md                 # Setup instructions
+├── .env.example               # Template for secrets
+├── .gitignore                  # Files excluded from Git
+├── test_search.py            # Test script for DuckDuckGo search
+├── agents/                    # Agent classes
+│   ├── base_agent.py         # Abstract base class
+│   ├── coordinator_agent.py  # Coordinator
+│   ├── planner_agent.py      # Generates study plan
+│   ├── resource_agent.py     # Recommends resources
+│   └── quiz_agent.py         # Generates quiz
+├── utils/                     # Helper utilities
+│   ├── gemini_helper.py      # Gemini API wrapper
+│   └── search_helper.py      # DuckDuckGo search wrapper
+└── assets/                    # Folder for static files
+    └── .gitkeep
+
 
 ---
 
