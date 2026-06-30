@@ -46,7 +46,7 @@ graph TD
 
 - **Coordinator Agent** (`agents/coordinator_agent.py`): The supervisor. It receives input, runs validation, executes the worker agents, compiles their results, and generates a welcome briefing.
 - **Planner Agent** (`agents/planner_agent.py`): Calculations-oriented. It calculates time remaining and structures a custom curriculum.
-- **Resource Agent** (`agents/resource_agent.py`): Reference librarian. It curates reputable educational sources with clear hyperlinks.
+  - **Resource Agent** (`agents/resource_agent.py`): Reference librarian. It curates reputable educational sources with clear hyperlinks, using `utils/search_helper.py` (DuckDuckGo search) to fetch real, verified links instead of AI-generated ones.
 - **Quiz Agent** (`agents/quiz_agent.py`): Test examiner. It drafts exact practice questions and wraps responses in HTML details tags for self-assessment.
 
 ---
@@ -172,3 +172,8 @@ Before clicking deploy, you must tell Streamlit what your Gemini API key is:
    GEMINI_MODEL = "gemini-1.5-flash"
    ```
 3. Click **Save** and then click **Deploy!** Your app will be live and accessible to anyone via a public link.
+## 🌐 Deployment
+
+StudyMate AI has been successfully deployed and is live on Streamlit Cloud. You can try it out directly without any setup:
+
+**🔗 Live App:** [https://studymate-ai-ggjtxbzfaappdedhcyf7pa7.streamlit.app/](https://studymate-ai-ggjtxbzfaappdedhcyf7pa7.streamlit.app/)
