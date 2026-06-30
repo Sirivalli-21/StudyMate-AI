@@ -148,6 +148,90 @@ Streamlit Community Cloud is a free hosting service. You can deploy this project
 1. Create a public repository on GitHub.
 2. Initialize git in your local project directory, add your files, and push to GitHub:
    ```bash
+## 🌐 Deployment
+
+StudyMate AI has been successfully deployed and is live on Streamlit Cloud. You can try it out directly without any setup:
+
+**🔗 Live App:** [https://studymate-ai-ggjtxbzfaappdedhcyf7pa7.streamlit.app/](https://studymate-ai-ggjtxbzfaappdedhcyf7pa7.streamlit.app/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
    git init
    git add .
    git commit -m "Initial commit of StudyMate AI"
